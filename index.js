@@ -43,39 +43,39 @@ function onFileSelected(event) {
             }
             return response.json(); })
             .then(function(json_response) {
-                // json_response has this format:
-                // {
-                //   "data": [
-                //     {
-                //       "label": "Cat",
-                //       "confidences": [
-                //         {
-                //           "label": "Cat",
-                //           "confidence": 1
-                //         },
-                //         {
-                //           "label": "Dog",
-                //           "confidence": 2.430905149281037e-15
-                //         }
-                //       ]
-                //     }
-                //   ],
-                //   "flag_index": null,
-                //   "updated_state": null,
-                //   "durations": [
-                //     0.04598379135131836
-                //   ],
-                //   "avg_durations": [
-                //     0.16849387327829995
-                //   ]
-                // }
+              // json_response has this format:
+              // {
+              //   "data": [
+              //     {
+              //       "label": "Cat",
+              //       "confidences": [
+              //         {
+              //           "label": "Cat",
+              //           "confidence": 1
+              //         },
+              //         {
+              //           "label": "Dog",
+              //           "confidence": 2.430905149281037e-15
+              //         }
+              //       ]
+              //     }
+              //   ],
+              //   "flag_index": null,
+              //   "updated_state": null,
+              //   "durations": [
+              //     0.04598379135131836
+              //   ],
+              //   "avg_durations": [
+              //     0.16849387327829995
+              //   ]
+              // }
 
-                const label = json_response?.data[0]?.label
+              const label = json_response?.data[0]?.label
 
-                // show the prediction
-                predictionDiv.innerHTML = `🎉 <u>Prediction: ${label}</u> 🎉`
-                errorDiv.innerHTML = '';
-                return;
+              // show the prediction
+              predictionDiv.innerHTML = `🎉 <u>Prediction: ${label}</u> 🎉`
+              errorDiv.innerHTML = '';
+              return;
             })
   });
 }
