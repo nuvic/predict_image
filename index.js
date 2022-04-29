@@ -24,8 +24,9 @@ function onFileSelected(event) {
 
   reader.readAsDataURL(selectedFile);
 
-  const predictionDiv = document.getElementById('prediction')
-  const errorDiv = document.getElementById('error')
+  const predictionEl = document.getElementById('prediction')
+  const confidencesEl = document.getElementById('confidences')
+  const errorEl = document.getElementById('error')
 
   reader.addEventListener("loadend", function() {             
       // Make a API call by passing our image
@@ -37,8 +38,9 @@ function onFileSelected(event) {
           .then(function(response) {
             if (response.status != 200) {
                 // early return if the api errors out and show error message
-                errorDiv.innerHTML = '<u>Sorry the API is not working currently. Please try again later</u>'
-                predictionDiv.innerHTML = '';
+                errorEl.innerHTML = '<u>Sorry the API is not working currently. Please try again later</u>'
+                predictionEl.innerHTML = '';
+                confidencesEl.innerHTML = '';
                 return;
             }
             return response.json(); })
@@ -70,11 +72,23 @@ function onFileSelected(event) {
               //   ]
               // }
 
-              const label = json_response?.data[0]?.label
+              const label = json_response?.data[0]?.label;
+
+              // Get the confidences for cat and dog
+              // firstLabel and secondLabel are cat and dog
+              // the order changes depending on the category predicted,
+              // that's why the variable names are not fixed to catLabel/dogLabel
+              const firstLabel = json_response?.data[0]?.confidences[0]?.label;
+              const firstLabelConfidence = json_response?.data[0]?.confidences[0]?.confidence
+              const secondLabel = json_response?.data[0]?.confidences[1]?.label;
+              const secondLabelConfidence = json_response?.data[0]?.confidences[1]?.confidence
 
               // show the prediction
-              predictionDiv.innerHTML = `🎉 <u>Prediction: ${label}</u> 🎉`
-              errorDiv.innerHTML = '';
+              predictionEl.innerHTML = `🎉 <u>Prediction: ${label}</u> 🎉`
+              confidencesEl.innerHTML = `Confidence:<br>
+                                          ${firstLabel}: ${firstLabelConfidence}<br>
+                                          ${secondLabel}: ${secondLabelConfidence}`
+              errorEl.innerHTML = '';
               return;
             })
   });
