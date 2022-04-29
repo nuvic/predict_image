@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cat or Dog predictor</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+  </head>
+  <body>
+    <header>
+        <h1>Predict a dog or cat from an image</h1>
+        <p>Model provided by <a href="https://github.com/fastai/fastai">fastai</a> and api hosted by <a href="https://hf.space/embed/jph00/testing/api" target="_blank">hugging face</a>
+        </p>
+    </header>
+    <main>
+        <header>
+            <h2>Submit a picture of either a cat or dog</h2>
+            <p id="prediction"></p>
+            <p id="error"></p>
+        </header>
+        <section>
+            <img id="myImage" height="400" width="400">
+            <form id="form">
+                <label for="fileInput"></label>
+                <input id="fileInput" type="file" onchange="onFileSelected(event)" name="File">
+            </form>
+        </section>
+    </main>
+	<script src="index.js"></script>
+  </body>
+</html>
